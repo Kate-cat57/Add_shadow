@@ -11,6 +11,7 @@ WORKSPACE_ID = int(os.environ['context.workspaceId'])
 PROJECT_ID = int(os.environ['modal.state.slyProjectId'])
 RESULT_PROJECT_NAME = os.environ["modal.state.projectName"]
 TRANSPARENCE = float(os.environ["modal.state.transparence"])
+POBABILITY = float(os.environ["modal.state.probability"])
 
 my_app = sly.AppService()
 
@@ -46,6 +47,8 @@ def add_shadow(api: sly.Api, task_id, context, state, app_logger):
 
             for label in ann.labels:
                 if not label.geometry.geometry_name() == "bitmap":
+                    continue
+                if random.random() > POBABILITY:
                     continue
                 mask = label.geometry.data
 
