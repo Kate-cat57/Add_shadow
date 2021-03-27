@@ -2,20 +2,21 @@
   "name": "Add shadow",
   "type": "app",
   "categories": [
-    "transform"
+    "synthetic data"
   ],
   "description": "Add shadow",
   "docker_image": "supervisely/base-py-sdk:6",
   "main_script": "src/add_shadow.py",
   "modal_template": "src/modal.html",
   "modal_template_state": {
-    "transparence": 0.6
+    "transparence": 0.6,
+    "probability": 0.5
   },
   "task_location": "workspace_tasks",
   "isolate": true,
   "context_menu": {
     "target": ["images_project"],
-    "context_category": "Transform"
+    "context_category": "Synthetic data"
   },
   "icon": "https://img.icons8.com/fluent/96/000000/combo-chart.png",
   "icon_background": "#FFFFFF"
