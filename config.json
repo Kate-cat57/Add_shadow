@@ -1,0 +1,22 @@
+{
+  "name": "Add shadow",
+  "type": "app",
+  "categories": [
+    "transform"
+  ],
+  "description": "Add shadow",
+  "docker_image": "supervisely/base-py-sdk:6",
+  "main_script": "src/add_shadow.py",
+  "modal_template": "src/modal.html",
+  "modal_template_state": {
+    "transparence": 0.6
+  },
+  "task_location": "workspace_tasks",
+  "isolate": true,
+  "context_menu": {
+    "target": ["images_project"],
+    "context_category": "Transform"
+  },
+  "icon": "https://img.icons8.com/fluent/96/000000/combo-chart.png",
+  "icon_background": "#FFFFFF"
+}
