@@ -9,6 +9,7 @@ import supervisely_lib as sly
 TEAM_ID = int(os.environ['context.teamId'])
 WORKSPACE_ID = int(os.environ['context.workspaceId'])
 PROJECT_ID = int(os.environ['modal.state.slyProjectId'])
+RESULT_PROJECT_NAME = os.environ["modal.state.projectName"]
 
 my_app = sly.AppService()
 
@@ -22,7 +23,7 @@ def add_shadow(api: sly.Api, task_id, context, state, app_logger):
     src_meta = sly.ProjectMeta.from_json(src_meta_json)
     src_datasets = api.dataset.get_list(src_project.id)
 
-    dst_project_name = src_project.name + "_shadow"
+    dst_project_name = RESULT_PROJECT_NAME
     dst_project = api.project.create(WORKSPACE_ID, dst_project_name)
 
     dst_meta = src_meta
