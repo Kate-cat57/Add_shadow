@@ -11,7 +11,7 @@
   "modal_template_state": {
     "transparence": 0.6,
     "probability": 0.5,
-    "maxShadow": 1
+    "maxShadow": 3
   },
   "task_location": "workspace_tasks",
   "isolate": true,
