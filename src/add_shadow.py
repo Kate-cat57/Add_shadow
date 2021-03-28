@@ -12,6 +12,7 @@ PROJECT_ID = int(os.environ['modal.state.slyProjectId'])
 RESULT_PROJECT_NAME = os.environ["modal.state.projectName"]
 TRANSPARENCE = float(os.environ["modal.state.transparence"])
 POBABILITY = float(os.environ["modal.state.probability"])
+MAX_SHADOWS = int(os.environ["modal.state.maxShadow"])
 
 my_app = sly.AppService()
 
@@ -53,34 +54,38 @@ def add_shadow(api: sly.Api, task_id, context, state, app_logger):
                 mask = label.geometry.data
 
                 # random
-                shift_row = random.randint(-1 * mask.shape[0] // 2, mask.shape[0] // 2)
-                shift_col = random.randint(-1 * mask.shape[1] // 2, mask.shape[1] // 2)
-
                 src_row = label.geometry.origin.row
                 src_col = label.geometry.origin.col
                 print(src_row, src_col)
-                # --------------
-                # negative case
-                # row
-                if shift_row < 0 and src_row + shift_row < 0:
-                    shift_row = src_row * -1
-
-                # col
-                if shift_col < 0 and src_col + shift_col < 0:
-                    shift_col = src_col * -1
-
-                # positive + 0 case
-                # row
-                if shift_row >= 0 and mask.shape[0] + shift_row + src_row > mask_src.shape[0]:
-                    shift_row = mask_src.shape[0] - mask.shape[0] - src_row
-
-                # col
-                if shift_col >= 0 and mask.shape[1] + shift_col + src_col > mask_src.shape[1]:
-                    shift_col = mask_src.shape[1] - mask.shape[1] - src_col
-                # ----------
                 mask_src[src_row:src_row + mask.shape[0], src_col:src_col + mask.shape[1]] = mask
-                mask_shifted[src_row + shift_row:src_row + mask.shape[0] + shift_row,
-                src_col + shift_col:src_col + mask.shape[1] + shift_col] = mask
+
+                count_shadow = random.randint(count_shadow_min, count_shadow_max)
+                for i in range(count_shadow):
+                    # random
+                    shift_row = random.randint(-1 * mask.shape[0] // 2, mask.shape[0] // 2)
+                    shift_col = random.randint(-1 * mask.shape[1] // 2, mask.shape[1] // 2)
+
+                    #--------------
+                    # negative case
+                    # row
+                    if shift_row < 0 and src_row + shift_row < 0:
+                        shift_row = src_row * -1
+
+                    # col
+                    if shift_col < 0 and src_col + shift_col < 0:
+                        shift_col = src_col * -1
+
+                    # positive + 0 case
+                    # row
+                    if shift_row >= 0 and mask.shape[0] + shift_row + src_row > mask_src.shape[0]:
+                        shift_row = mask_src.shape[0] - mask.shape[0] - src_row
+
+                    # col
+                    if shift_col >= 0 and mask.shape[1] + shift_col + src_col > mask_src.shape[1]:
+                        shift_col = mask_src.shape[1] - mask.shape[1] - src_col
+                    #----------
+                    temp_matrix = mask_shifted[src_row + shift_row:src_row + mask.shape[0] + shift_row, src_col + shift_col:src_col + mask.shape[1] + shift_col]
+                    mask_shifted[src_row + shift_row:src_row + mask.shape[0] + shift_row, src_col + shift_col:src_col + mask.shape[1] + shift_col] = np.logical_or(temp_matrix, mask)
 
             # ------------
 
