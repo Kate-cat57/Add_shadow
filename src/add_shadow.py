@@ -59,7 +59,7 @@ def add_shadow(api: sly.Api, task_id, context, state, app_logger):
                 print(src_row, src_col)
                 mask_src[src_row:src_row + mask.shape[0], src_col:src_col + mask.shape[1]] = mask
 
-                count_shadow = random.randint(count_shadow_min, count_shadow_max)
+                count_shadow = random.randint(1, MAX_SHADOWS)
                 for i in range(count_shadow):
                     # random
                     shift_row = random.randint(-1 * mask.shape[0] // 2, mask.shape[0] // 2)
