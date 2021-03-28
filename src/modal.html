@@ -8,6 +8,9 @@
         <div class="fflex mt10">Probability:</div>
  
         <el-input-number v-model="state.probability" :min="0" :max="1"></el-input-number>
+        
+        <div class="fflex mt10">Max number of shadow:</div>
+        <el-input-number v-model="state.maxShadow" :min="1" :max="5"></el-input-number>
     </sly-field>
 
     <sly-field title="Result project" description="Define the name of result project">
