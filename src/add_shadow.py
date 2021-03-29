@@ -11,7 +11,7 @@ WORKSPACE_ID = int(os.environ['context.workspaceId'])
 PROJECT_ID = int(os.environ['modal.state.slyProjectId'])
 RESULT_PROJECT_NAME = os.environ["modal.state.projectName"]
 MIN_TRANSPARENCE = float(os.environ["modal.state.mintransparence"])
-MAX_TRANSPARENCE = float(os.environ["modal.state.maxtransparence"])
+MAX_TRANSPARENCE = float(os.environ["modal.state.maxtransparence"]) 
 POBABILITY = float(os.environ["modal.state.probability"])
 MAX_SHADOWS = int(os.environ["modal.state.maxShadow"])
 
@@ -97,6 +97,7 @@ def add_shadow(api: sly.Api, task_id, context, state, app_logger):
             invert_shadow = np.invert(shadow)
             convert_shadow = invert_shadow.astype(float)
             
+            TRANSPARENCE = 0.8
             
             convert_shadow[convert_shadow == 0] = TRANSPARENCE  # add opacity
 
