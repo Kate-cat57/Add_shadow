@@ -3,11 +3,8 @@
         <sly-icon slot="icon" :options="{ color: '#4977ff', bgColor: '#ddf2ff', rounded: false }">
             <i class="zmdi zmdi-fast-forward"></i>
         </sly-icon>
-        <div class="fflex mt10">Min transperence:</div>
-        <el-input v-model="state.mintransparence" :min="0.0" :max="1.0"></el-input>
-        
-        <div class="fflex mt10">Max transperence:</div>
-        <el-input v-model="state.maxtransparence" :min="0.0" :max="1.0"></el-input>
+        <div class="fflex mt10">Transperence:</div>
+        <el-input v-model="state.transparence" :min="0.0" :max="1.0"></el-input>
         
         <div class="fflex mt10">Probability:</div>
         <el-input v-model="state.probability" :min="0.0" :max="1.0"></el-input>
